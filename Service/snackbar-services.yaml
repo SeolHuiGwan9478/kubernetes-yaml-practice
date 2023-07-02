@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: home
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  type: NodePort
+  selector:
+    service: home
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  type: NodePort
+  selector:
+    service: order
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  type: NodePort
+  selector:
+    service: payment
+  ports:
+  - port: 80
+    targetPort: 8080

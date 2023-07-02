@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: order
+  template:
+    metadata:
+      labels:
+        service: order
+    spec:
+      containers:
+      - name: order
+        image: yoonjeong/order:1.0
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 50m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: payment
+  template:
+    metadata:
+      labels:
+        service: payment
+    spec:
+      containers:
+      - name: payment
+        image: yoonjeong/payment:1.0
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 50m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home
+  namespace: snackbar
+  labels:
+    project: snackbar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: home
+  template:
+    metadata:
+      labels:
+        service: home
+    spec:
+      containers:
+      - name: home
+        image: yoonjeong/home:1.0
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 50m
