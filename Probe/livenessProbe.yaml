@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unhealthy
+  labels:
+    health: unhealthy
+spec:
+  containers:
+  - name: unhealthy
+    image: yoonjeong/unhealthy-app:1.0
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      failureThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        memory: 64Mi
+        cpu: 50m
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthy
+  labels:
+    health: healthy
+spec:
+  containers:
+  - name: healthy
+    image: yoonjeong/healthy-app:1.0
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      failureThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        memory: 64Mi
+        cpu: 50m
