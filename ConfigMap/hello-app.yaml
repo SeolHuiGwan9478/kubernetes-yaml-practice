@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app
+  labels:
+    app: hello-app
+spec:
+  containers:
+  - name: hello-app
+    image: yoonjeong/hello-app:1.0
+    ports:
+    - containerPort: 8080
+    # 여기 집중! configMap을 참조하여 환경변수를 가져올 것임
+    env:
+    - name: STUDENT_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: greeting-config
+          key: STUDENT_NAME
+    - name: MESSAGE
+      valueFrom:
+        configMapKeyRef:
+          name: greeting-config
+          key: MESSAGE
+    - name: GREETING
+      value: $(STUDENT_NAME) $(MESSAGE)
+    resources:
+      limits:
+        memory: 64Mi
+        cpu: 50m
