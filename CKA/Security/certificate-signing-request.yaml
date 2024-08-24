@@ -1,0 +1,11 @@
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: huigwan
+spec:
+  expirationSeconds: 600 # 10 minutes
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+  request: encoded by using base64 csr
