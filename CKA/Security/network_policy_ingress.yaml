@@ -13,7 +13,7 @@ spec:
     - podSelector:
         matchLabels:
           name: api-pod
-      namespaceSelector:
+    - namespaceSelector:
         matchLabels:
           name: prod
     - ipBlock:
